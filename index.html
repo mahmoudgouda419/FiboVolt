@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FiboVolt — Eco-Friendly Energy Generation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="icon" type="image/x-icon" href="logo - Copy.png" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap"
@@ -723,17 +724,86 @@
         transform: translateY(0);
       }
 
+      /* ─── HAMBURGER BUTTON ─── */
+      .nav-hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 36px;
+        height: 36px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        z-index: 200;
+      }
+      .nav-hamburger span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: var(--teal-pale);
+        border-radius: 2px;
+        transition: transform 0.3s, opacity 0.3s;
+      }
+      .nav-hamburger.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .nav-hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-hamburger.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      /* Mobile nav drawer */
+      .nav-drawer {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 99;
+        background: rgba(7, 26, 29, 0.97);
+        backdrop-filter: blur(16px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+      }
+      .nav-drawer.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .nav-drawer a {
+        font-family: "Playfair Display", serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--off-white);
+        text-decoration: none;
+        letter-spacing: -0.5px;
+        transition: color 0.2s;
+      }
+      .nav-drawer a:hover {
+        color: var(--teal-bright);
+      }
+
       /* ─── RESPONSIVE ─── */
       @media (max-width: 900px) {
         #hero {
           grid-template-columns: 1fr;
-          padding: 120px 32px 80px;
+          padding: 110px 28px 72px;
+          gap: 40px;
         }
         .hero-visual {
           display: none;
         }
         section {
-          padding: 80px 32px;
+          padding: 72px 28px;
         }
         .problem-grid,
         .results-layout {
@@ -746,28 +816,151 @@
         nav {
           padding: 14px 24px;
         }
+        nav.shrink {
+          padding: 10px 24px;
+        }
         .nav-links {
           gap: 20px;
         }
         footer {
-          padding: 32px;
+          padding: 32px 24px;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+        .results-numbers {
+          grid-template-columns: 1fr 1fr;
+        }
+        /* Make table scrollable on tablet */
+        .table-wrap {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+        table {
+          min-width: 560px;
         }
       }
-      @media (max-width: 580px) {
+
+      @media (max-width: 640px) {
+        /* Nav: hide links, show hamburger + drawer */
+        .nav-links {
+          display: none;
+        }
+        .nav-hamburger {
+          display: flex;
+        }
+        .nav-drawer {
+          display: flex;
+        }
+
+        #hero {
+          padding: 96px 20px 60px;
+        }
+        .hero-badge {
+          font-size: 0.6rem;
+          padding: 4px 10px;
+        }
+        .hero-title img {
+          width: 100% !important;
+          max-width: 280px;
+          height: auto;
+        }
+        .hero-subtitle {
+          font-size: 0.95rem;
+        }
+        .hero-desc {
+          font-size: 0.88rem;
+        }
+        .hero-stats {
+          gap: 20px;
+          flex-wrap: wrap;
+        }
+        .stat-num {
+          font-size: 1.8rem;
+        }
+
+        section {
+          padding: 60px 20px;
+        }
+        .section-title {
+          font-size: 1.75rem;
+        }
+
         .features-grid {
           grid-template-columns: 1fr;
         }
         .results-numbers {
           grid-template-columns: 1fr 1fr;
+          gap: 12px;
         }
-        .nav-links {
-          display: none;
+        .result-val {
+          font-size: 2rem;
         }
+
+        /* Table horizontal scroll on mobile */
+        .table-wrap {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          border-radius: 6px;
+        }
+        table {
+          min-width: 480px;
+          font-size: 0.8rem;
+        }
+        th, td {
+          padding: 10px 12px;
+        }
+
+        /* Team */
+        .team-grid {
+          gap: 12px;
+        }
+        .team-card {
+          flex: 1 1 140px;
+          padding: 20px 14px;
+        }
+        .avatar {
+          width: 52px;
+          height: 52px;
+          font-size: 1.1rem;
+        }
+        .team-info {
+          flex-direction: column;
+          gap: 20px;
+          align-items: flex-start;
+        }
+
+        /* Chart */
+        .chart-container {
+          padding: 20px 14px;
+        }
+
+        footer {
+          padding: 28px 20px;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+        .footer-copy {
+          font-size: 0.58rem;
+        }
+      }
+
+      @media (max-width: 380px) {
         .hero-stats {
-          gap: 24px;
+          gap: 14px;
         }
-        .hero-title {
-          font-size: 3rem;
+        .stat-num {
+          font-size: 1.5rem;
+        }
+        .results-numbers {
+          grid-template-columns: 1fr;
+        }
+        .result-val {
+          font-size: 2.2rem;
+        }
+        .section-title {
+          font-size: 1.5rem;
         }
       }
     </style>
@@ -789,7 +982,20 @@
         <li><a href="#materials">Materials</a></li>
         <li><a href="#team">Team</a></li>
       </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
+
+    <!-- Mobile Nav Drawer -->
+    <div class="nav-drawer" id="navDrawer">
+      <a href="#problem" class="drawer-link">Problem</a>
+      <a href="#solution" class="drawer-link">Solution</a>
+      <a href="#how-it-works" class="drawer-link">Process</a>
+      <a href="#results" class="drawer-link">Results</a>
+      <a href="#materials" class="drawer-link">Materials</a>
+      <a href="#team" class="drawer-link">Team</a>
+    </div>
 
     <!-- ─── HERO ─── -->
     <section id="hero">
@@ -1396,6 +1602,7 @@
         <div class="section-divider"></div>
       </div>
       <div class="reveal">
+        <div class="table-wrap">
         <table>
           <thead>
             <tr>
@@ -1479,6 +1686,7 @@
             </tr>
           </tbody>
         </table>
+        </div>
         <p
           style="
             margin-top: 20px;
@@ -1757,6 +1965,33 @@
 
         drawChart();
         window.addEventListener("resize", drawChart);
+      })();
+
+      /* ─── HAMBURGER MENU ─── */
+      (function () {
+        const btn = document.getElementById("hamburger");
+        const drawer = document.getElementById("navDrawer");
+        if (!btn || !drawer) return;
+
+        function toggleMenu(open) {
+          btn.classList.toggle("open", open);
+          drawer.classList.toggle("open", open);
+          document.body.style.overflow = open ? "hidden" : "";
+        }
+
+        btn.addEventListener("click", () => {
+          toggleMenu(!drawer.classList.contains("open"));
+        });
+
+        // Close on link click
+        drawer.querySelectorAll(".drawer-link").forEach(function (link) {
+          link.addEventListener("click", () => toggleMenu(false));
+        });
+
+        // Close on outside tap
+        drawer.addEventListener("click", function (e) {
+          if (e.target === drawer) toggleMenu(false);
+        });
       })();
     </script>
   </body>
